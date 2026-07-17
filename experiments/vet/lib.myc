@@ -1,0 +1,91 @@
+// nodule: sec
+// `mycelium-sec` — **`myc-sec`**, security checks as tooling (M-367).
+//
+// v0's library core is the **`wild`-block audit** — the Mycelium-specific check no off-the-shelf scanner
+// gives. `wild` is the language's only unsafe escape hatch (LR-9/S6; DN-02 §5 — denied by default,
+// lexically marked); the audit **inventories every `wild` block** so the unsafe surface is known (never
+// ambient), and requires each to carry an **ADR-014 `// SAFETY:` justification** — an unjustified `wild`
+// is an explicit finding (G2). It is a lexical **recogniser** (like the M-141 header lints), honestly
+// scoped to *inventory + justification-presence*: it surfaces the author's `// SAFETY:` claim, it does
+// not adjudicate soundness (VR-5 — report the claim, never fabricate a verdict).
+//
+// The secrets / supply-chain families orchestrate the existing `scripts/checks/{secrets,deny}.sh` gates
+// (the bin); the load-bearing honesty rule is **skip ≠ pass** — a missing scanner is *reduced coverage*,
+// reported as such, never folded into a clean bill. KC-3: above the kernel; no new dependency.
+//
+// **M-961 (RFC-0038 / DN-77) placement note:** the inject-mode gate core (`loose`/`inoculated`
+// policy, `TrustRoot`, the `SignatureScheme` verify seam, refusals, manifest) lives at the
+// gate's insertion point — `mycelium-mlir::inject_gate` (core tier) — NOT here: this crate is
+// tools-tier, and a `core → tools` dependency would violate DN-68's `no-upward-tier-edges`
+// rule (`xtask/deps-strata.toml`; the M-883/M-884 seam precedent). Security *tooling* built in
+// this crate can depend downward on that module.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule sec;
+
+// A finding's severity — a **fixed, declared** map (looked up, never heuristically scored; VR-5).
+pub type Severity = Info | Low | Medium | High | Critical;
+
+impl Show[Severity] for Severity {
+  fn render(x: Severity) => Bytes =
+    match x { Info => "Info", Low => "Low", Medium => "Medium", High => "High", Critical => "Critical" };
+};
+
+fn eq_Severity(a: Severity, b: Severity) => Binary{1} =
+  match a { Info => match b { Info => 0b1, _ => 0b0 }, Low => match b { Low => 0b1, _ => 0b0 }, Medium => match b { Medium => 0b1, _ => 0b0 }, High => match b { High => 0b1, _ => 0b0 }, Critical => match b { Critical => 0b1, _ => 0b0 } };
+
+impl Severity {
+  // The canonical label.
+  fn as_str(self: Severity) => Bytes = match self { Info => "info", Low => "low", Medium => "medium", High => "high", Critical => "critical" };
+};
+
+// One `wild` block found by the audit — located, and justified-or-not.
+type WildBlock = WildBlock(Bytes, Binary{32}, Bool, Bytes);
+
+impl Show[WildBlock] for WildBlock {
+  fn render(x: WildBlock) => Bytes =
+    match x { WildBlock(p0, p1, p2, p3) => bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat("WildBlock(", render(p0)), ", "), render(width_cast(p1, 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000))), ", "), render(p2)), ", "), render(p3)), ")") };
+};
+
+fn eq_WildBlock(a: WildBlock, b: WildBlock) => Binary{1} =
+    match a { WildBlock(p0, p1, p2, p3) => match b { WildBlock(q0, q1, q2, q3) => and(and(and(bytes_eq(p0, q0), eq(p1, q1)), match p2 { True => match q2 { True => 0b1, False => 0b0 }, False => match q2 { True => 0b0, False => 0b1 } }), bytes_eq(p3, q3)) } };
+
+// A security finding — always cites *why* (G2).
+type Finding = Finding(Bytes, Bytes, Severity, Bytes, Bytes);
+
+impl Show[Finding] for Finding {
+  fn render(x: Finding) => Bytes =
+    match x { Finding(p0, p1, p2, p3, p4) => bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat("Finding(", render(p0)), ", "), render(p1)), ", "), render(p2)), ", "), render(p3)), ", "), render(p4)), ")") };
+};
+
+fn eq_Finding(a: Finding, b: Finding) => Binary{1} =
+    match a { Finding(p0, p1, p2, p3, p4) => match b { Finding(q0, q1, q2, q3, q4) => and(and(and(and(bytes_eq(p0, q0), bytes_eq(p1, q1)), eq_Severity(p2, q2)), bytes_eq(p3, q3)), bytes_eq(p4, q4)) } };
+
+// The `wild`-audit result over a set of sources: the full inventory + the (unjustified) findings.
+pub type WildAudit = WildAudit(Vec[WildBlock], Vec[Finding]);
+
+fn show_vec_Finding(xs: Vec[Finding]) => Bytes =
+  match xs { Nil => "Nil", Cons(h, t) => bytes_concat("Cons(", bytes_concat(render(h), bytes_concat(", ", bytes_concat(show_vec_Finding(t), ")")))) };
+
+fn show_vec_WildBlock(xs: Vec[WildBlock]) => Bytes =
+  match xs { Nil => "Nil", Cons(h, t) => bytes_concat("Cons(", bytes_concat(render(h), bytes_concat(", ", bytes_concat(show_vec_WildBlock(t), ")")))) };
+
+impl Show[WildAudit] for WildAudit {
+  fn render(x: WildAudit) => Bytes =
+    match x { WildAudit(p0, p1) => bytes_concat(bytes_concat(bytes_concat(bytes_concat("WildAudit(", show_vec_WildBlock(p0)), ", "), show_vec_Finding(p1)), ")") };
+};
+
+impl Init[WildAudit] for WildAudit {
+  fn init() => WildAudit =
+    WildAudit(Nil, Nil);
+};
+
+fn eq_vec_Finding(a: Vec[Finding], b: Vec[Finding]) => Binary{1} =
+  match a { Nil => match b { Nil => 0b1, Cons(_, _) => 0b0 }, Cons(ha, ta) => match b { Nil => 0b0, Cons(hb, tb) => and(eq_Finding(ha, hb), eq_vec_Finding(ta, tb)) } };
+
+fn eq_vec_WildBlock(a: Vec[WildBlock], b: Vec[WildBlock]) => Binary{1} =
+  match a { Nil => match b { Nil => 0b1, Cons(_, _) => 0b0 }, Cons(ha, ta) => match b { Nil => 0b0, Cons(hb, tb) => and(eq_WildBlock(ha, hb), eq_vec_WildBlock(ta, tb)) } };
+
+fn eq_WildAudit(a: WildAudit, b: WildAudit) => Binary{1} =
+    match a { WildAudit(p0, p1) => match b { WildAudit(q0, q1) => and(eq_vec_WildBlock(p0, q0), eq_vec_Finding(p1, q1)) } };

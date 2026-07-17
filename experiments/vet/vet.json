@@ -1,0 +1,52 @@
+{
+  "records": [
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-sec-myc/experiments/vet/bin/myc-sec.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 9,
+      "emitted_items": 2
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-sec-myc/experiments/vet/lib.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 15,
+      "emitted_items": 5
+    }
+  ],
+  "total_non_test_items": 24,
+  "total_emitted_items": 7,
+  "total_checked_clean_items": 7,
+  "class_counts": {
+    "Clean": 2
+  },
+  "phylum": {
+    "ran": true,
+    "ok": true,
+    "nodules": [
+      {
+        "nodule": "sec.bin_kw.myc_u2D_sec",
+        "file": "bin/myc-sec.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      },
+      {
+        "nodule": "sec",
+        "file": "lib.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      }
+    ],
+    "diagnostic": ""
+  },
+  "total_checked_clean_items_phylum": 7
+}

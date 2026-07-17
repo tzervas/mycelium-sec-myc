@@ -1,0 +1,30 @@
+// nodule: sec.bin_kw.myc_u2D_sec
+// `myc-sec` — security checks as tooling CLI (M-367; contract `docs/spec/Security-Checks-Contract.md`).
+//
+// Three families: the **`wild`-block audit** (in-repo, the new check), and **secrets** + **supply-chain**
+// (orchestrating the existing `scripts/checks/{secrets,deny}.sh`). The load-bearing honesty rule is
+// **skip ≠ pass**: a missing scanner is reported as *reduced coverage*, never folded into a clean bill
+// (G2/VR-5). Every finding cites *why*; severity is a fixed declared map.
+//
+// ```text
+// myc-sec [--project <dir>] [--strict] [--explain] [--no-secrets] [--no-supply-chain]
+// ```
+//
+// Exit codes: 0 clean (or only reduced-coverage) · 1 a failing finding (critical/high, a script failure,
+// or — with `--strict` — a medium) · 64 usage.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule sec.bin_kw.myc_u2D_sec;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: sec) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type Severity = Info | Low | Medium | High | Critical;
+type WildBlock = WildBlock(Bytes, Binary{32}, Bool, Bytes);
+type Finding = Finding(Bytes, Bytes, Severity, Bytes, Bytes);
+type WildAudit = WildAudit(Vec[WildBlock], Vec[Finding]);
+
+// The status of an orchestrated (shell-script) family — the honest three-way (never just ok/fail).
+type Coverage = Ok | Reduced | Fail;
+
+fn eq_Coverage(a: Coverage, b: Coverage) => Binary{1} =
+  match a { Ok => match b { Ok => 0b1, _ => 0b0 }, Reduced => match b { Reduced => 0b1, _ => 0b0 }, Fail => match b { Fail => 0b1, _ => 0b0 } };

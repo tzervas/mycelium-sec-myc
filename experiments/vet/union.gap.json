@@ -1,0 +1,405 @@
+{
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule sec.bin.myc-sec;",
+      "reason": "derived nodule path `sec.bin.myc-sec` has segment(s) [bin] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule sec.bin.myc-sec;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `sec.bin_kw.myc_u2D_sec`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 15,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 16,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: process :: { Command , ExitCode } ;",
+      "reason": "`use std.process::Command` — `std.process` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.process::ExitCode` — `std.process` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 18,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_cli_common :: Args ;",
+      "reason": "`use mycelium_cli_common::Args` — `mycelium_cli_common` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 19,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_sec :: { audit_wild , collect_myc , explain_wild , Severity , WildAudit } ;",
+      "reason": "`use mycelium_sec::audit_wild` — `audit_wild` is not among sibling `mycelium_sec`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Severity,WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 19,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_sec :: { audit_wild , collect_myc , explain_wild , Severity , WildAudit } ;",
+      "reason": "`use mycelium_sec::collect_myc` — `collect_myc` is not among sibling `mycelium_sec`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Severity,WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 19,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_sec :: { audit_wild , collect_myc , explain_wild , Severity , WildAudit } ;",
+      "reason": "`use mycelium_sec::explain_wild` — `explain_wild` is not among sibling `mycelium_sec`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Severity,WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 21,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The status of an orchestrated (shell-script) family — the honest three-way (never just ok/fail).\"] # [derive (Clone , Copy , PartialEq , Eq)] enum Coverage { # [doc = \" Ran fully, no findings.\"] Ok , # [doc = \" Ran, but a scanner was absent — partial coverage (NOT a pass).\"] Reduced , # [doc = \" Ran and found something (or the gate failed).\"] Fail , }",
+      "reason": "enum `Coverage` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Coverage"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 21,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The status of an orchestrated (shell-script) family — the honest three-way (never just ok/fail).\"] # [derive (Clone , Copy , PartialEq , Eq)] enum Coverage { # [doc = \" Ran fully, no findings.\"] Ok , # [doc = \" Ran, but a scanner was absent — partial coverage (NOT a pass).\"] Reduced , # [doc = \" Ran and found something (or the gate failed).\"] Fail , }",
+      "reason": "enum `Coverage` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Coverage"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 21,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The status of an orchestrated (shell-script) family — the honest three-way (never just ok/fail).\"] # [derive (Clone , Copy , PartialEq , Eq)] enum Coverage { # [doc = \" Ran fully, no findings.\"] Ok , # [doc = \" Ran, but a scanner was absent — partial coverage (NOT a pass).\"] Reduced , # [doc = \" Ran and found something (or the gate failed).\"] Fail , }",
+      "reason": "enum `Coverage` derive(Eq): covered by co-occurring PartialEq → `fn eq_Coverage` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "Coverage"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 32,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "fn usage () -> ExitCode { eprintln ! (\"usage: myc-sec [--project <dir>] [--strict] [--explain] [--no-secrets] [--no-supply-chain]\") ; ExitCode :: from (64) }",
+      "reason": "function body contains a macro-invocation statement (e.g. `debug_assert!`/`println!`) — no macro system in this grammar fragment",
+      "item_name": "usage"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 39,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn main () -> ExitCode { let mut dir = PathBuf :: from (\".\") ; let mut strict = false ; let mut explain = false ; let mut do_secrets = true ; let mut do_supply = true ; let mut args = Args :: from_env () ; while let Some (a) = args . next () { match a . as_str () { \"--project\" => match args . value () { Some (p) => dir = PathBuf :: from (p) , None => return usage () , } , \"--strict\" => strict = true , \"--explain\" => explain = true , \"--no-secrets\" => do_secrets = false , \"--no-supply-chain\" => do_supply = false , _ => return usage () , } } let audit = run_wild (& dir) ; let mut failing = false ; let mut reduced = false ; println ! (\"security: wild-audit — {} block(s), {} justified, {} unjustified\" , audit . inventory . len () , audit . justified () , audit . unjustified ()) ; if explain { print ! (\"{}\" , explain_wild (& audit)) ; } else { for f in & audit . findings { println ! (\"  [{}] {} at {}: {}\" , f . severity . as_str () , f . rule , f . at , f . why) ; } } if audit . findings . iter () . any (| f | f . severity >= Severity :: High) { failing = true ; } if strict && ! audit . findings . is_empty () { failing = true ; } if do_secrets { match run_script (& dir , \"scripts/checks/secrets.sh\" , \"secrets\") { Coverage :: Ok => println ! (\"security: secrets — ok\") , Coverage :: Reduced => { println ! (\"security: secrets — REDUCED COVERAGE (a scanner is absent; not a clean bill)\") ; reduced = true ; } Coverage :: Fail => { println ! (\"security: secrets — FAIL (potential secret; investigate)\") ; failing = true ; } } } if do_supply { match run_script (& dir , \"scripts/checks/deny.sh\" , \"supply-chain\") { Coverage :: Ok => println ! (\"security: supply-chain — ok\") , Coverage :: Reduced => { println ! (\"security: supply-chain — REDUCED COVERAGE (cargo-deny/audit absent; not a clean bill)\") ; reduced = true ; } Coverage :: Fail => { println ! (\"security: supply-chain — FAIL (advisory/policy finding)\") ; failing = true ; } } } let coverage = if reduced { \"REDUCED\" } else { \"FULL\" } ; if failing { eprintln ! (\"myc-sec: findings present (coverage: {coverage})\") ; ExitCode :: from (1) } else { println ! (\"myc-sec: no failing findings (coverage: {coverage})\") ; ExitCode :: SUCCESS } }",
+      "reason": "qualified/associated-function call `PathBuf :: from` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "main"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 136,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Run the wild-audit over every `.myc` under `dir` (empty audit if the dir can't be read — reported, not\"] # [doc = \" crashed; the absence of sources is honestly an empty inventory, not a hidden pass).\"] fn run_wild (dir : & Path) -> WildAudit { let files = match collect_myc (dir) { Ok (f) => f , Err (e) => { eprintln ! (\"myc-sec: {e}\") ; return WildAudit :: default () ; } } ; let mut sources = Vec :: new () ; for f in files { if let Ok (src) = std :: fs :: read_to_string (& f) { let rel = f . strip_prefix (dir) . unwrap_or (& f) . to_string_lossy () . replace ('\\\\' , \"/\") ; sources . push ((rel , src)) ; } } audit_wild (& sources) }",
+      "reason": "function body's last statement is not a trailing expression (implicit unit return, or a semicolon-terminated final statement)",
+      "item_name": "run_wild"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "line": 160,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Orchestrate an existing check script, classifying its result honestly (skip ≠ pass). The scripts exit\"] # [doc = \" 0 on success *or* graceful skip and print an `ok`/`skip`/`FAIL` marker — so exit code alone cannot tell\"] # [doc = \" \\\"clean\\\" from \\\"scanner absent\\\". A missing script is itself reduced coverage (named, not silent).\"] fn run_script (dir : & Path , rel : & str , family : & str) -> Coverage { let script = dir . join (rel) ; if ! script . is_file () { eprintln ! (\"myc-sec: {family}: {rel} not found — reduced coverage\") ; return Coverage :: Reduced ; } let output = match Command :: new (\"bash\") . arg (& script) . current_dir (dir) . output () { Ok (o) => o , Err (e) => { eprintln ! (\"myc-sec: {family}: could not run {rel}: {e} — reduced coverage\") ; return Coverage :: Reduced ; } } ; if ! output . status . success () { return Coverage :: Fail ; } let text = format ! (\"{}{}\" , String :: from_utf8_lossy (& output . stdout) , String :: from_utf8_lossy (& output . stderr)) ; if text . contains (\"FAIL\") { Coverage :: Fail } else if text . contains (\"skip\") { Coverage :: Reduced } else { Coverage :: Ok } }",
+      "reason": "method call `.join(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__join` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `join(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "run_script"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 22,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: path :: { Path , PathBuf } ;",
+      "reason": "`use std.path::Path` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.path::PathBuf` — `std.path` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A finding's severity — a **fixed, declared** map (looked up, never heuristically scored; VR-5).\"] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub enum Severity { # [doc = \" Hygiene / advisory.\"] Info , # [doc = \" Low — advisory.\"] Low , # [doc = \" An unjustified unsafe surface (an unjustified `wild` block).\"] Medium , # [doc = \" A supply-chain policy violation.\"] High , # [doc = \" Ships a secret or a known-exploitable advisory.\"] Critical , }",
+      "reason": "enum `Severity` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Severity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A finding's severity — a **fixed, declared** map (looked up, never heuristically scored; VR-5).\"] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub enum Severity { # [doc = \" Hygiene / advisory.\"] Info , # [doc = \" Low — advisory.\"] Low , # [doc = \" An unjustified unsafe surface (an unjustified `wild` block).\"] Medium , # [doc = \" A supply-chain policy violation.\"] High , # [doc = \" Ships a secret or a known-exploitable advisory.\"] Critical , }",
+      "reason": "enum `Severity` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Severity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A finding's severity — a **fixed, declared** map (looked up, never heuristically scored; VR-5).\"] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub enum Severity { # [doc = \" Hygiene / advisory.\"] Info , # [doc = \" Low — advisory.\"] Low , # [doc = \" An unjustified unsafe surface (an unjustified `wild` block).\"] Medium , # [doc = \" A supply-chain policy violation.\"] High , # [doc = \" Ships a secret or a known-exploitable advisory.\"] Critical , }",
+      "reason": "enum `Severity` derive(Eq): covered by co-occurring PartialEq → `fn eq_Severity` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "Severity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" A finding's severity — a **fixed, declared** map (looked up, never heuristically scored; VR-5).\"] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub enum Severity { # [doc = \" Hygiene / advisory.\"] Info , # [doc = \" Low — advisory.\"] Low , # [doc = \" An unjustified unsafe surface (an unjustified `wild` block).\"] Medium , # [doc = \" A supply-chain policy violation.\"] High , # [doc = \" Ships a secret or a known-exploitable advisory.\"] Critical , }",
+      "reason": "enum `Severity` derive(...) names PartialOrd, Ord not in the DN-128 enum-derive set this leaf builds (Debug/PartialEq/Clone/Copy recognized; bare Eq is a satisfied co-occurrence note; Hash/PartialOrd/Ord/Default stay product-only for now) — dropped, no confirmed Mycelium surface",
+      "item_name": "Severity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 39,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "impl Severity { # [doc = \" The canonical label.\"] # [must_use] pub fn as_str (self) -> & 'static str { match self { Severity :: Info => \"info\" , Severity :: Low => \"low\" , Severity :: Medium => \"medium\" , Severity :: High => \"high\" , Severity :: Critical => \"critical\" , } } }",
+      "reason": "dropped non-doc attribute(s) on method `as_str`: # [must_use]",
+      "item_name": "impl Severity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 53,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" One `wild` block found by the audit — located, and justified-or-not.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct WildBlock { # [doc = \" The file it occurs in.\"] pub file : String , # [doc = \" 1-based line of the `wild {` opener.\"] pub line : u32 , # [doc = \" Whether an ADR-014 `// SAFETY:` justification is present (same line or the preceding comment block).\"] pub justified : bool , # [doc = \" The opener line text (trimmed), for the inventory report.\"] pub text : String , }",
+      "reason": "struct `WildBlock` named field(s) `file, line, justified, text` emitted positionally as `WildBlock(Bytes, Binary{32}, Bool, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "WildBlock"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 53,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" One `wild` block found by the audit — located, and justified-or-not.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct WildBlock { # [doc = \" The file it occurs in.\"] pub file : String , # [doc = \" 1-based line of the `wild {` opener.\"] pub line : u32 , # [doc = \" Whether an ADR-014 `// SAFETY:` justification is present (same line or the preceding comment block).\"] pub justified : bool , # [doc = \" The opener line text (trimmed), for the inventory report.\"] pub text : String , }",
+      "reason": "struct `WildBlock` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "WildBlock"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 53,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" One `wild` block found by the audit — located, and justified-or-not.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct WildBlock { # [doc = \" The file it occurs in.\"] pub file : String , # [doc = \" 1-based line of the `wild {` opener.\"] pub line : u32 , # [doc = \" Whether an ADR-014 `// SAFETY:` justification is present (same line or the preceding comment block).\"] pub justified : bool , # [doc = \" The opener line text (trimmed), for the inventory report.\"] pub text : String , }",
+      "reason": "struct `WildBlock` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "WildBlock"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 66,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" A security finding — always cites *why* (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Finding { # [doc = \" The check family (`wild-audit` in v0).\"] pub family : & 'static str , # [doc = \" The rule code (e.g. `wild-unjustified`).\"] pub rule : & 'static str , # [doc = \" Severity (fixed map).\"] pub severity : Severity , # [doc = \" Where (`file:line`).\"] pub at : String , # [doc = \" Why this is a finding, in author-facing terms.\"] pub why : String , }",
+      "reason": "struct `Finding` named field(s) `family, rule, severity, at, why` emitted positionally as `Finding(Bytes, Bytes, Severity, Bytes, Bytes)` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "Finding"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 66,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A security finding — always cites *why* (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Finding { # [doc = \" The check family (`wild-audit` in v0).\"] pub family : & 'static str , # [doc = \" The rule code (e.g. `wild-unjustified`).\"] pub rule : & 'static str , # [doc = \" Severity (fixed map).\"] pub severity : Severity , # [doc = \" Where (`file:line`).\"] pub at : String , # [doc = \" Why this is a finding, in author-facing terms.\"] pub why : String , }",
+      "reason": "struct `Finding` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Finding"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 66,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" A security finding — always cites *why* (G2).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct Finding { # [doc = \" The check family (`wild-audit` in v0).\"] pub family : & 'static str , # [doc = \" The rule code (e.g. `wild-unjustified`).\"] pub rule : & 'static str , # [doc = \" Severity (fixed map).\"] pub severity : Severity , # [doc = \" Where (`file:line`).\"] pub at : String , # [doc = \" Why this is a finding, in author-facing terms.\"] pub why : String , }",
+      "reason": "struct `Finding` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "Finding"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 81,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" The `wild`-audit result over a set of sources: the full inventory + the (unjustified) findings.\"] # [derive (Debug , Clone , Default , PartialEq , Eq)] pub struct WildAudit { # [doc = \" Every `wild` block found (justified and not).\"] pub inventory : Vec < WildBlock > , # [doc = \" The findings (one per **unjustified** block).\"] pub findings : Vec < Finding > , }",
+      "reason": "struct `WildAudit` named field(s) `inventory, findings` emitted positionally as `WildAudit(Vec[WildBlock], Vec[Finding])` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 81,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The `wild`-audit result over a set of sources: the full inventory + the (unjustified) findings.\"] # [derive (Debug , Clone , Default , PartialEq , Eq)] pub struct WildAudit { # [doc = \" Every `wild` block found (justified and not).\"] pub inventory : Vec < WildBlock > , # [doc = \" The findings (one per **unjustified** block).\"] pub findings : Vec < Finding > , }",
+      "reason": "struct `WildAudit` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 81,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The `wild`-audit result over a set of sources: the full inventory + the (unjustified) findings.\"] # [derive (Debug , Clone , Default , PartialEq , Eq)] pub struct WildAudit { # [doc = \" Every `wild` block found (justified and not).\"] pub inventory : Vec < WildBlock > , # [doc = \" The findings (one per **unjustified** block).\"] pub findings : Vec < Finding > , }",
+      "reason": "struct `WildAudit` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 90,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl WildAudit { # [doc = \" How many blocks are justified.\"] # [must_use] pub fn justified (& self) -> usize { self . inventory . iter () . filter (| b | b . justified) . count () } # [doc = \" How many are unjustified.\"] # [must_use] pub fn unjustified (& self) -> usize { self . inventory . iter () . filter (| b | ! b . justified) . count () } }",
+      "reason": "no member of this impl block could be transpiled (2 sub-issue(s)): impl method `justified` body: method call `.count(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__count` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `count(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `unjustified` body: method call `.count(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__count` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `count(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "WildAudit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 103,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Audit a set of `(file, contents)` sources for `wild` blocks (LR-9/S6). Deterministic (file-ordered).\"] # [must_use] pub fn audit_wild (sources : & [(String , String)]) -> WildAudit { let mut audit = WildAudit :: default () ; let mut srcs : Vec < & (String , String) > = sources . iter () . collect () ; srcs . sort_by (| a , b | a . 0 . cmp (& b . 0)) ; for (file , src) in srcs { let lines : Vec < & str > = src . lines () . collect () ; for (i , raw) in lines . iter () . enumerate () { if ! opens_wild_block (raw) { continue ; } let justified = has_safety (& lines , i) ; let line = (i + 1) as u32 ; audit . inventory . push (WildBlock { file : file . clone () , line , justified , text : raw . trim () . to_owned () , }) ; if ! justified { audit . findings . push (Finding { family : \"wild-audit\" , rule : \"wild-unjustified\" , severity : Severity :: Medium , at : format ! (\"{file}:{line}\") , why : \"a `wild` block (the denied-by-default unsafe escape hatch, LR-9/S6) has no \\\n                          adjacent `// SAFETY:` justification — every unsafe region must be justified \\\n                          (ADR-014); flagged, never silently trusted (G2)\" . to_owned () , }) ; } } } audit }",
+      "reason": "qualified/associated-function call `WildAudit :: default` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "audit_wild"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 140,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Whether `raw` opens a `wild` block — the `wild` keyword (whole word) followed by `{`, in the **code**\"] # [doc = \" part of the line (a `wild` inside a `//` comment or an identifier substring does not count).\"] fn opens_wild_block (raw : & str) -> bool { let code = match raw . find (\"//\") { Some (idx) => & raw [.. idx] , None => raw , } ; let bytes = code . as_bytes () ; let mut search_from = 0 ; while let Some (rel) = code [search_from ..] . find (\"wild\") { let start = search_from + rel ; let end = start + 4 ; let before_ok = start == 0 || ! is_ident_byte (bytes [start - 1]) ; let mut j = end ; while j < bytes . len () && (bytes [j] == b' ' || bytes [j] == b'\\t') { j += 1 ; } let after_ok = end < bytes . len () && ! is_ident_byte (bytes [end]) ; if before_ok && after_ok && j < bytes . len () && bytes [j] == b'{' { return true ; } search_from = end ; } false }",
+      "reason": "method call `.find(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__find` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `find(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "opens_wild_block"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 168,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn is_ident_byte (b : u8) -> bool { b . is_ascii_alphanumeric () || b == b'_' }",
+      "reason": "method call `.is_ascii_alphanumeric(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__is_ascii_alphanumeric` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `is_ascii_alphanumeric(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "is_ident_byte"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 172,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Whether an ADR-014 `// SAFETY:` justification is present for the `wild` block on line `idx`: on the\"] # [doc = \" same line (a trailing comment) or in the contiguous comment block immediately above it.\"] fn has_safety (lines : & [& str] , idx : usize) -> bool { if line_has_safety (lines [idx]) { return true ; } let mut k = idx ; while k > 0 { k -= 1 ; let t = lines [k] . trim () ; if t . is_empty () { break ; } if t . starts_with (\"//\") { if line_has_safety (lines [k]) { return true ; } } else { break ; } } false }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "has_safety"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 197,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn line_has_safety (line : & str) -> bool { line . find (\"//\") . map (| i | line [i ..] . contains (\"SAFETY:\")) . unwrap_or (false) }",
+      "reason": "method call `.unwrap_or(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unwrap_or` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unwrap_or(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "line_has_safety"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 203,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Render the `wild`-audit `EXPLAIN` (no black box): the inventory + each unjustified finding's *why*.\"] # [must_use] pub fn explain_wild (audit : & WildAudit) -> String { let mut out = format ! (\"wild-audit: {} block(s), {} justified, {} unjustified\\n\" , audit . inventory . len () , audit . justified () , audit . unjustified ()) ; for b in & audit . inventory { let tag = if b . justified { \"justified\" } else { \"UNJUSTIFIED\" } ; out . push_str (& format ! (\"  {}:{} [{tag}] {}\\n\" , b . file , b . line , b . text)) ; } for f in & audit . findings { out . push_str (& format ! (\"  finding [{}] {} at {}: {}\\n\" , f . severity . as_str () , f . rule , f . at , f . why)) ; } out }",
+      "reason": "method call `.len(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__len` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `len(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "explain_wild"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 232,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Collect every `.myc` under `dir` (recursively, sorted); skipping hidden entries and `target/`.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" Returns an I/O error string if a directory cannot be read.\"] pub fn collect_myc (dir : & Path) -> Result < Vec < PathBuf > , String > { let mut out = Vec :: new () ; walk (dir , & mut out) ? ; out . sort () ; Ok (out) }",
+      "reason": "qualified/associated-function call `Vec :: new` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "collect_myc"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 243,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn walk (dir : & Path , out : & mut Vec < PathBuf >) -> Result < () , String > { let entries = std :: fs :: read_dir (dir) . map_err (| e | format ! (\"{}: {e}\" , dir . display ())) ? ; let mut paths : Vec < PathBuf > = entries . filter_map (| e | e . ok () . map (| e | e . path ())) . collect () ; paths . sort () ; for path in paths { let name = path . file_name () . and_then (| s | s . to_str ()) . unwrap_or_default () ; if name . starts_with ('.') || name == \"target\" { continue ; } if path . is_dir () { walk (& path , out) ? ; } else if path . extension () . is_some_and (| x | x == \"myc\") { out . push (path) ; } } Ok (()) }",
+      "reason": "unsupported expression form `std :: fs :: read_dir (dir) . map_err (| e | format ! (\"{}: {e}\" , dir . display ())) ?`",
+      "item_name": "walk"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "line": 265,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests ;",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "category_counts": {
+    "DeriveAttr": 5,
+    "DeriveSatisfied": 9,
+    "Impl": 1,
+    "Import": 7,
+    "MultiStmtBody": 3,
+    "NamedFieldDrop": 3,
+    "Other": 9,
+    "ReservedWord": 1,
+    "TestItem": 1
+  }
+}

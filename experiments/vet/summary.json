@@ -1,0 +1,96 @@
+{
+  "files": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+      "total_items": 9,
+      "non_test_items": 9,
+      "emitted": 2,
+      "gaps": 14,
+      "expressible_pct": 22.22222222222222,
+      "category_counts": {
+        "DeriveSatisfied": 3,
+        "Import": 6,
+        "MultiStmtBody": 2,
+        "Other": 2,
+        "ReservedWord": 1
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+      "total_items": 16,
+      "non_test_items": 15,
+      "emitted": 5,
+      "gaps": 25,
+      "expressible_pct": 33.33333333333333,
+      "category_counts": {
+        "DeriveAttr": 5,
+        "DeriveSatisfied": 6,
+        "Impl": 1,
+        "Import": 1,
+        "MultiStmtBody": 1,
+        "NamedFieldDrop": 3,
+        "Other": 7,
+        "TestItem": 1
+      }
+    }
+  ],
+  "totals": {
+    "total_items": 25,
+    "non_test_items": 24,
+    "emitted": 7,
+    "gaps": 39,
+    "expressible_pct": 29.166666666666668,
+    "category_counts": {
+      "DeriveAttr": 5,
+      "DeriveSatisfied": 9,
+      "Impl": 1,
+      "Import": 7,
+      "MultiStmtBody": 3,
+      "NamedFieldDrop": 3,
+      "Other": 9,
+      "ReservedWord": 1,
+      "TestItem": 1
+    }
+  },
+  "remap": {
+    "phylum": {
+      "source_crate": "mycelium-sec",
+      "target_phylum": "sec"
+    },
+    "nodules": [
+      {
+        "target_nodule": "sec.bin.myc-sec",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-sec/src/bin/myc-sec.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "sec",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-sec/src/lib.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      }
+    ],
+    "idiom_choices": []
+  }
+}
